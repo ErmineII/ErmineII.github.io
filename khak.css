@@ -1,13 +1,13 @@
 body {
-	display: block;
-	margin-top: 2%;
-	margin-right: auto;
-	margin-bottom: 40px;
-	margin-left: auto;
-	background-color: khaki;
-	text-align: center;
-	color: darkRed;
-	max-width: 700px;
+  display: block;
+  margin-top: 2%;
+  margin-right: auto;
+  margin-bottom: 40px;
+  margin-left: auto;
+  background-color: khaki;
+  text-align: center;
+  color: darkRed;
+  max-width: 700px;
 }
 
 /*
@@ -38,54 +38,58 @@ a:link{
 }
 
 a:visited{
-	color: #511;
+  color: #511;
 }
 
 .interactive {
-	max-width: 800px;
+  max-width: 800px;
 }
 
 button {
-	background-color: #11E;
-	height: 30;
-	text-align: center;
+  background-color: #11E;
+  height: 30;
+  text-align: center;
 }
 
 input {
-	background-color: inherit;
-	text-align: center;
-	margin-bottom: 4px;
-	font-family: monospace;
+  background-color: inherit;
+  text-align: center;
+  margin-bottom: 4px;
+  font-family: monospace;
 }
 
 textarea {
-	background-color: inherit;
-	text-align: left;
+  background-color: inherit;
+  text-align: left;
 }
 
 .gray-khaki{
-	 background-color: #d9d07e;
-	 border-color: darkkhaki;
+  background-color: #d9d07e;
+  border-color: darkkhaki;
 }
 
 h2 {
-	text-indent: -5%;
+  text-indent: -5%;
 }
 
 blockquote{
-	background-color: inherit;
-	metal-on-zebes: no;
-	margin-top: 5px;
-	margin-bottom: 8px;
-	max-width: 600px
+  background-color: inherit;
+  metal-on-zebes: no;
+  margin-top: 5px;
+  margin-bottom: 8px;
+  max-width: 600px
 }
 
 @font-face {
-    font-family: 'SpiderWire';
-    src: url('media/SpiderWire-Regular.otf') format('opentype');
+  font-family: 'SpiderWire';
+  src: url('media/SpiderWire-Regular.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'SpiderWireMono';
-    src: url('media/SpiderWireMono-Regular.otf') format('opentype');
+  font-family: 'SpiderWireMono';
+  src: url('media/SpiderWireMono-Regular.otf') format('opentype');
+}
+
+ul{
+  text-align: left;
 }
