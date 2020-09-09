@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 -20 100 120">
+  <title>
+    shady green theme
+  </title>
+  <ellipse fill="darkOliveGreen"
+    cx="60" cy="80" rx="7" ry="40"
+    transform="rotate(-10 60 100)" />
+  <ellipse fill="darkOliveGreen"
+    cx="40" cy="40" rx="5" ry="20"
+    transform="rotate(-20 60 20)" />
+  <path fill="green"
+    d="M 40,30 A 20,20 0 0,0 5,45" />
+  <path fill="green"
+    d="M 40,30 A 20,20 0 0,0 10,5" />
+  <path fill="green"
+    d="M 40,30 A 30,20 0 0,1 80,5" />
+  <circle r="5" cx="35" cy="30" fill="#000" />
+</svg>
