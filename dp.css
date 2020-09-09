@@ -1,106 +1,38 @@
+@import "all.css";
+
 body {
-	display: block;
-	margin-top: 2%;
-	margin-right: auto;
-	margin-bottom: 40px;
-	margin-left: auto;
-	background-color: #001;
-	text-align: center;
-	color: #69b;
-	max-width: 700px;
+  background-color: #001;
+  color: #69b;
 }
 
-.nerd {
-	font-family: 'SpiderWire';
-	font-size: 30pt;
-	text-align: justify;
-	text-indent: 10%;
-	width: auto;
-	margin: auto;
+a:link {
+  color: #6c8;
 }
 
-.notes {
-	font-family: 'SpiderWire';
-	font-size: 30pt;
+a:visited {
+  color: #5b7;
 }
 
-pre{
-	font-family: 'SpiderWireMono';
-	max-width: 500px;
-	font-size: 30pt;
-	text-indent: 0%;
-}
-
-a:link{
-	color: #6C8;
-}
-
-a:visited{
-	color: #5B7;
-}
-
-.interactive {
-	max-width: 800px;
-}
-
-::placeholder{
-	color: #68AA;
-}
-
-button {
-	background-color: #FFF1;
-	height: 30;
-	text-align: center;
-	border-color: #FFF2;
-}
-
-input {
-	background-color: inherit;
-	border-color: #0003;
-	text-align: center;
-	margin-bottom: 4px;
-	font-family: monospace;
+::placeholder {
+  color: #68aa;
 }
 
 textarea {
-	text-align: left;
-	color: #68A;
-	background-color: #0002;
-	border-color: #0003;
+  color: #68a;
+  background-color: #0002;
+  border-color: #0003;
 }
 
-.gray{
-	 background-color: #4452;
-	 border-color: #4453;
+.gray {
+  background-color: #4452;
+  border-color: #4453;
 }
 
-.fg{
-	background-color: #FFF1;
+.fg {
+  background-color: #fff1;
 }
 
-h2 {
-	text-indent: -5%;
-}
-
-blockquote{
-	background-color: inherit;
-	metal-on-zebes: no;
-	margin-top: 5px;
-	margin-bottom: 8px;
-	max-width: 600px
-}
-
-@font-face {
-  font-family: 'SpiderWire';
-  src: url('media/SpiderWire-Regular.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'SpiderWireMono';
-  src: url('media/SpiderWireMono-Regular.otf') format('opentype');
-}
-
-
-ul{
-  text-align: left;
+img.interactive,
+#themech {
+  filter: drop-shadow(0px 0px 2px #777);
 }
