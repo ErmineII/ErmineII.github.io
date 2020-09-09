@@ -3,15 +3,22 @@ var icon = document.getElementById("themech");
 
 icon.width = 30;
 icon.height = 30;
-var dtheme = css.href === "dp.css" ? 1 : 0;
 var themes = [
   ["media/moon.svg", "khak.css"],
-  ["media/sun.svg", "dp.css"]
+  ["media/tree.svg", "dp.css"],
+  ["media/sun.svg", "olive.css"]
 ];
+
+var dtheme = 0;
+for (let i = 0; i < themes.length; i++)
+  if (css.href.match(themes[i][1])) {
+    dtheme = i;
+    break;
+  }
 
 icon.src = themes[dtheme][0];
 icon.onclick = () => {
-  dtheme = 1 - dtheme;
+  dtheme = (1 + dtheme) % themes.length;
   css.href = themes[dtheme][1];
   icon.src = themes[dtheme][0];
 };
