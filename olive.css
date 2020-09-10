@@ -1,0 +1,39 @@
+@import "all.css";
+
+body {
+  background-color: darkOliveGreen;
+  color: #200;
+}
+
+a:link {
+  color: #411;
+}
+
+a:visited {
+  color: #431;
+}
+
+::placeholder {
+  color: #3224;
+  font-weight: bold;
+}
+
+textarea {
+  color: #321;
+  background-color: #0002;
+  border-color: #0003;
+}
+
+.gray {
+  background-color: #7942;
+  border-color: #6832;
+}
+
+.fg {
+  background-color: #0001;
+}
+
+img.interactive,
+#themech {
+  filter: drop-shadow(0px 0px 2px black);
+}
