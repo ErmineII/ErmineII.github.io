@@ -61,7 +61,7 @@ end
       js = require("js")
       lisp = require("lisp")
       lisp.begin()
-      js.global.LispEval = function (str)
+      js.global.lispEval = function (str)
         return lisp.eval(lisp.read(str))
       end
     </script>
