@@ -1,9 +1,8 @@
 <html><head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8" id="meta" />
 		<title>Lua</title>
 		<link rel="stylesheet" href="khak.css" type="text/css" id="theme"></link>
 		<link rel="icon" href='media/NPHotChoc.svg.png'></link>
-		<script src="lib/fengari-web.js" type="text/javascript"></script>
 	</head>
 	<body >
 	    <div class="gray notes">
@@ -26,6 +25,7 @@
               id="inp"></input>
 		</blockquote></div>
     <script src="console.js" type="text/javascript"></script>
+		<script src="lib/fengari-web.js" type="text/javascript"></script>
     <script type="application/lua">
 function tree(obj, maxdepth, before) -- call like tree(var) or tree(var, 4)
   before = before or ""; maxdepth = maxdepth or 4
@@ -61,11 +61,15 @@ end
       js = require("js")
       lisp = require("lisp")
       lisp.begin()
-      js.global.lispEval = function (str)
-        return lisp.eval(lisp.read(str))
+      lispEval = function (str)
+        print(lisp.eval(lisp.read(str)))
       end
+      lispEval[[(+ 2 22)]]
+      js.global.document:getElementById("meta").fn = lispEval
     </script>
     <script>
-      myconsole.setinputhandler(lispEval);
+      myconsole.setinputhandler(
+        document.getElementById("meta").fn
+      );
     </script>
 </body></html>
