@@ -1,6 +1,6 @@
 <html><head>
     <meta charset="UTF-8" id="meta" />
-		<title>Lua</title>
+		<title>Lisp!</title>
 		<link rel="stylesheet" href="khak.css" type="text/css" id="theme"></link>
 		<link rel="icon" href='media/NPHotChoc.svg.png'></link>
 	</head>
@@ -62,14 +62,19 @@ end
       lisp = require("lisp")
       lisp.begin()
       lispEval = function (str)
-        print(lisp.eval(lisp.read(str)))
+        return lisp.eval(lisp.read(str))
       end
-      lispEval[[(+ 2 22)]]
-      js.global.document:getElementById("meta").fn = lispEval
+      prEv = function (str)
+        print(lispEval(str))
+      end
+      prEv[[(+ 2 22)]]
+      js.global.document:getElementById("meta").le = lispEval
+      js.global.document:getElementById("meta").pe = prEv
     </script>
     <script>
       myconsole.setinputhandler(
-        document.getElementById("meta").fn
+        document.getElementById("meta").le
       );
+      console.log(myconsole.inputhandler(fengari.to_luastring("(+ 3 4)")))
     </script>
 </body></html>
