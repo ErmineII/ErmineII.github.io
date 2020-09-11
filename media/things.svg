@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  width="900" height="900" viewBox="0 0 900 500">
+  <title>
+    things
+  </title>
+  <style>
+    text {fill: #7773;}
+    .min { font: italic 10pt monospace;}
+    .max { font: italic 20pt monospace;}
+    .mid { font: italic 15pt monospace;}
+  </style>
+  <text x="40" y="0" class="min">
+    MonoSpace with a
+      capital space
+  </text>
+  <text x="90" y="90" class="max">
+    ((λ(x)(+ x 1)) 2)
+  </text>
+  <text x="50" y="230" class="mid">
+    .getElementById()
+  </text>
+  <text x="80" y="130" class="min">
+    Call me Ishmael
+  </text>
+</svg>

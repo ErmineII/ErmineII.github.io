@@ -7,11 +7,13 @@ let myconsole = {};
 
   myconsole.log = function (args) {
     myconsole.outp.innerHTML = myconsole.outp.innerHTML + " " + args + "<br> ";
+    myconsole.outp.scrollTop = myconsole.outp.scrollHeight;
   };
 
   myconsole.error = function (args) {
     myconsole.outp.innerHTML =
       myconsole.outp.innerHTML + " <strong>ERROR:</strong> " + args + "<br> ";
+    myconsole.outp.scrollTop = myconsole.outp.scrollHeight;
   };
 
   var oldLog = console.log;
@@ -53,6 +55,7 @@ let myconsole = {};
         break;
       case 32:
         if (!key.shiftKey) break;
+      //falls through
       case 38:
         if (myconsole.inp.value && !myconsole.inputoffset) {
           myconsole.inputs.push(myconsole.inp.value);

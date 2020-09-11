@@ -3,26 +3,39 @@
     <link rel="stylesheet" href="khak.css" type="text/css" id="theme"></link>
     <link rel="icon" href='media/NPHotChoc.svg.png'></link>
   </head>
-  <body style="font-family: monospace;">
-  <h2>
-    Under Construction...
-    <image src="media/moon.svg" id="themech"
-		    width="30" height="30" title="change theme">
-    </image>
-    <script type="text/javascript" src="theme.js">
-    </script>
-    <br>
-  </h2>
-  <ul class="fg">
-    <li><a href="spiderwire.html">spiderwire</a></li>
-    <li><a href="turing.html">
-      A turing machine simulator
-    </a></li>
-    <li><a href="lisp.html">
-      a mapL REPL
-    </a></li>
-    <li><a href="lua.html">
-      Fengari/lua REPL
+  <body style="font-family: monospace;
+               background-image: url('media/things.svg')">
+    <h2 onmouseover="chbg()" onmouseout="chbg()">
+      Under Construction...
+      <image src="media/moon.svg" id="themech"
+	  	    width="30" height="30" title="change theme">
+      </image>
+      <script type="text/javascript" src="theme.js">
+      </script>
+      <br>
+    </h2>
+    <ul class="fg">
+      <li><a href="spiderwire.html">spiderwire</a></li>
+      <li><a href="turing.html">
+        A turing machine simulator
       </a></li>
-  </ul>
-</body></html>
+      <li><a href="lisp.html">
+        a mapL REPL
+      </a></li>
+      <li><a href="lua.html">
+        Fengari/lua REPL
+      </a></li>
+    </ul>
+    <script>
+      let sty = document.body.style;
+      let img = sty.backgroundImage;
+      sty.backgroundImage = null;
+      function chbg(){
+        sty.backgroundImage = sty.backgroundImage?null:img;
+      }
+      function hdbg(){
+        sty.backgroundImage = null;
+      }
+    </script>
+  </body>
+</html>
