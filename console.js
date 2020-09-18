@@ -31,7 +31,7 @@ let myconsole = {};
   myconsole.inputs = [];
   myconsole.inputoffset = 0;
 
-  myconsole.inp.onkeypress = function (key) {
+  myconsole.inp.onkeydown = function (key) {
     myconsole.inputs = myconsole.inputs.map((x) => {
       return x.replace(/^ *$/, "");
     });
