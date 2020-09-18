@@ -64,17 +64,23 @@ end
       lispEval = function (str)
         return lisp.eval(lisp.read(str))
       end
-      prEv = function (str)
-        print(lispEval(str))
+      prEv = function (self,strgetter)
+        print(lispEval(strgetter()))
       end
-      prEv[[(+ 2 22)]]
       js.global.document:getElementById("meta").le = lispEval
       js.global.document:getElementById("meta").pe = prEv
     </script>
     <script>
-      myconsole.setinputhandler(
-        document.getElementById("meta").le
-      );
-      console.log(myconsole.inputhandler(fengari.to_luastring("(+ 3 4)")))
+      function esc(str){
+        return str
+          .replace(/(["'\\])/g, "\\$1")
+          .replace(/]]/, "\\]]");
+      }
+      function luaStringGetter(jsString){
+        return fengari.load("return [[" + esc(jsString) + "]]");
+      }
+      myconsole.setinputhandler( (str)=>{
+        document.getElementById("meta").pe(luaStringGetter(str))
+      });
     </script>
 </body></html>
