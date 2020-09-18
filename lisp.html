@@ -65,7 +65,7 @@ end
         return lisp.eval(lisp.read(str))
       end
       prEv = function (self,strgetter)
-        print(lispEval(strgetter()))
+        print(lisp.toString( lispEval(strgetter()) ))
       end
       js.global.document:getElementById("meta").le = lispEval
       js.global.document:getElementById("meta").pe = prEv
@@ -80,7 +80,9 @@ end
         return fengari.load("return [[" + esc(jsString) + "]]");
       }
       myconsole.setinputhandler( (str)=>{
-        document.getElementById("meta").pe(luaStringGetter(str))
+	try{
+          document.getElementById("meta").pe(luaStringGetter(str));
+	} catch (e) {myconsole.error(e);}
       });
     </script>
 </body></html>
