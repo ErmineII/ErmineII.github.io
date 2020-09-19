@@ -6,7 +6,8 @@ icon.height = 30;
 var themes = [
   ["media/moon.svg", "khak.css"],
   ["media/tree.svg", "dp.css"],
-  ["media/sun.svg", "olive.css"]
+  ["media/snowflake.svg", "olive.css"],
+  ["media/sun.svg", "all.css"]
 ];
 
 var dtheme = 0;
