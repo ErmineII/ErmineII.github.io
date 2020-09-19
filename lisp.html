@@ -24,6 +24,7 @@
                      font-family: 'SpiderWireMono';"
               id="inp"></input>
     </blockquote></div>
+    <textarea readonly id="lineview" hidden cols="80" lines="20 "></textarea>
     <script src="console.js" type="text/javascript"></script>
 		<script src="lib/fengari-web.js" type="text/javascript"></script>
     <script type="application/lua">
@@ -84,17 +85,25 @@ end
           document.getElementById("meta").pe(luaStringGetter(str));
 	      } catch (e) {
           myconsole.error(
-            e.replace(/lisp\.lua:([0-9]*):/,
-              `lisp.lua:<a href="lua/5.3/lisp.lua">$1 =></a>:`)
+            e.replace(/\/([a-z]*)\.lua:([0-9]*):/,
+              `lisp.lua:<a href="javascript:grabLine($2, '/lua/5.3/$1.lua')">$2 =></a>:`)
           );}
       });
-      /*
       async function grabLine(num, source){
         fetch(source)
           .then(response => response.text())
           .then(text =>{
-            document.
+            var out = document.querySelector("#lineview");
+            out.value =
+              lines(num-10, num+10, text);
+            out.hidden = false;
           });
-      }*/
+      }
+      function lines(start, end, from){
+        from = from.split("\n");
+        for(var i = 0; i < from.length; i++)
+          from[i] = i+1 + "\t" + from[i];
+        return from.slice(start, end).join("\n");
+      }
     </script>
 </body></html>
