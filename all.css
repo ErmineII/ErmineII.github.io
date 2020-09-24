@@ -62,6 +62,12 @@ textarea {
   border-color: #0003;
 }
 
+input,
+textarea {
+  max-width: 90%;
+  max-height: 90%;
+}
+
 h2 {
   text-indent: -5%;
 }

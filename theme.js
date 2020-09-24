@@ -4,10 +4,10 @@ var icon = document.getElementById("themech");
 icon.width = 30;
 icon.height = 30;
 var themes = [
-  ["media/moon.svg", "khak.css"],
-  ["media/tree.svg", "dp.css"],
-  ["media/snowflake.svg", "olive.css"],
-  ["media/sun.svg", "all.css"]
+  ["media/sun.svg", "khak.css"],
+  ["media/moon.svg", "dp.css"],
+  ["media/tree.svg", "olive.css"],
+  ["media/snowflake.svg", "all.css"]
 ];
 
 var dtheme = 0;
@@ -17,9 +17,9 @@ for (let i = 0; i < themes.length; i++)
     break;
   }
 
-icon.src = themes[dtheme][0];
+icon.src = themes[(dtheme + 1) % themes.length][0];
 icon.onclick = () => {
   dtheme = (1 + dtheme) % themes.length;
   css.href = themes[dtheme][1];
-  icon.src = themes[dtheme][0];
+  icon.src = themes[(dtheme + 1) % themes.length][0];
 };
