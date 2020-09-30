@@ -41,7 +41,8 @@ pre {
   color: #000a;
 }
 
-button {
+button,
+select {
   background-color: #fff1;
   height: 30;
   text-align: center;
@@ -93,6 +94,11 @@ blockquote {
 @font-face {
   font-family: "BefontSquare";
   src: url("media/BefontSquare-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "BefontLegible";
+  src: url("media/BefontLegible-Regular.otf") format("opentype");
 }
 
 ul {

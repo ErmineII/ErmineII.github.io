@@ -1,10 +1,10 @@
 <html><head>
-  <title>SW</title>
+  <title>BF</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="khak.css" type="text/css" id="theme"></link>
-  <link rel="icon" href='media/SWN.png'></link>
+  <link rel="icon" href='media/BFAt.svg'></link>
 </head>
-<body style="font-family: 'BefontSquare'; font-size: 30pt;">
+<body style="font-family: 'BefontLegible'; font-size: 30pt;">
   <h2>The Befunge Font&nbsp;
     <image src="media/moon.svg" id="themech"
       width="30" height="30" title="change theme">
@@ -13,15 +13,28 @@
     </script>
   </h2>
   <div style="font-size: 20pt;">
-      <a href="media/BefontSquare-Regular.otf" download>download</a>
+      <label for="style">style: </label>
+      <select id="style" oninput="(()=>{
+        document.body.style.fontFamily = this.value;
+        document.querySelector('#dl').href = 'media/'+this.value+'-Regular.otf';
+        document.querySelector('#try').style.fontFamily = this.value;
+      })()">
+        <option style="font-family: 'BefontLegible'" value="BefontLegible">
+          Legible
+        </option>
+        <option style="font-family: 'BefontSquare'"  value="BefontSquare" >
+          Square
+        </option>
+      </select>
+      <a href="media/BefontLegible-Regular.otf" id="dl" download>download</a>
   </div>
   <div class="fg">
     <ul >
       <li>Square</li>
       <li>Mono-spaced</li>
     </ul><br>
-    <textarea rows="10" cols="40" name="text" placeholder="try it"
-      style="font-family: 'BefontSquare'; font-size: 30pt;
+    <textarea id="try" rows="10" cols="40" name="text" placeholder="try it"
+      style="font-family: 'BefontLegible'; font-size: 30pt;
              font-weight: 500; margin: 0.25in; white-space: nowrap;">
 00v&<-max line    >>>>>>>v
 v<<   length      ^<,*52<0
