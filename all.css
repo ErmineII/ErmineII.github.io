@@ -90,6 +90,11 @@ blockquote {
   src: url("media/SpiderWireMono-Regular.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "BefontSquare";
+  src: url("media/BefontSquare-Regular.otf") format("opentype");
+}
+
 ul {
   text-align: left;
 }
