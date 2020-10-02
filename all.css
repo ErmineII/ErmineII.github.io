@@ -23,9 +23,8 @@ body {
 }
 
 pre {
-  font-family: "SpiderWireMono";
+  font-family: monospace;
   max-width: 500px;
-  font-size: 30pt;
   text-indent: 0%;
 }
 
@@ -93,11 +92,13 @@ blockquote {
 
 @font-face {
   font-family: "BefontSquare";
+  font-size: 20pt;
   src: url("media/BefontSquare-Regular.otf") format("opentype");
 }
 
 @font-face {
   font-family: "BefontLegible";
+  font-size: 20pt;
   src: url("media/BefontLegible-Regular.otf") format("opentype");
 }
 
@@ -105,6 +106,9 @@ ul {
   text-align: left;
 }
 
-#inp {
+#inp,
+#out {
   text-align: left;
+  font-family: "BefontLegible";
+  font-size: 20pt;
 }

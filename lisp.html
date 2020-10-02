@@ -21,8 +21,8 @@
         <a href="https://github.com/fengari-lua">Fengari</a><br>
       </pre>
         λ> <input type="search"
-              style="width: 500px; font-size: 20pt;
-                     font-family: 'SpiderWireMono';"
+              style="width: 500px;
+                     font-family: 'BefontLegible';"
               id="inp"></input>
     </blockquote></div>
     <div hidden>
@@ -99,6 +99,7 @@ end
               })()">$2 =></a>:`)
           );}
       });
+      myconsole.inputhandler("(quote . ..loaded)");
       async function grabLine(source, st, en){
         luafile=source;
         var start = document.querySelector("#start");
