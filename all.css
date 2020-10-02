@@ -9,8 +9,6 @@ body {
 }
 
 .nerd {
-  font-family: "SpiderWire";
-  font-size: 30pt;
   text-align: justify;
   text-indent: 10%;
   width: auto;
@@ -18,8 +16,8 @@ body {
 }
 
 .notes {
-  font-family: "SpiderWire";
-  font-size: 30pt;
+  font-family: sans;
+  font-size: 20pt;
 }
 
 pre {
@@ -79,12 +77,12 @@ blockquote {
   margin-bottom: 8px;
   max-width: 600px;
 }
-
+/*
 @font-face {
   font-family: "SpiderWire";
   src: url("media/SpiderWire-Regular.otf") format("opentype");
 }
-
+*/
 @font-face {
   font-family: "SpiderWireMono";
   src: url("media/SpiderWireMono-Regular.otf") format("opentype");
