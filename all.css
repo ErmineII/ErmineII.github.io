@@ -100,22 +100,13 @@ blockquote {
   src: url("media/BefontLegible-Regular.otf") format("opentype");
 }
 
-@font-face {
-  font-family: "bigpix";
-  font-size: 20pt;
-  src: url("media/bigpix-Regular.otf") format("opentype");
-}
-
 ul {
   text-align: left;
 }
 
 #inp,
-#out,
-#readline {
+#out {
   text-align: left;
   font-family: "BefontLegible";
   font-size: 20pt;
-  max-width: inherit;
-  margin: auto;
 }
