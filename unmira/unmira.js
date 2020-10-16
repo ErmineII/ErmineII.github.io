@@ -23,6 +23,10 @@ var unmira = {
         unmira.state.input.getchar = true; // wait for input
       }
     },
+    draw: function () {
+      unmira.graphics.setScreen(unmira.state.stack.pop());
+      unmira.state.running = true;
+    },
     print: function () {
       unmira.state.termBuf += unmira.state.stack.pop();
       unmira.state.running = true;
@@ -31,7 +35,13 @@ var unmira = {
       unmira.state.termBuf += unmira.state.stack.pop() + "\n";
       unmira.state.running = true;
     },
-    dopush: function (data) {
+    _print: function (str) {
+      return function () {
+        unmira.state.termBuf += str;
+        unmira.state.running = true;
+      };
+    },
+    _push: function (data) {
       return function () {
         unmira.state.stack.push(data);
         unmira.state.running = true;
@@ -43,7 +53,11 @@ var unmira = {
       );
       unmira.state.running = true;
     },
-    do: function (fn) {
+    drop: function () {
+      unmira.state.stack.pop();
+      unmira.state.running = true;
+    },
+    _do: function (fn) {
       return function () {
         fn();
         unmira.state.running = true;
@@ -51,7 +65,19 @@ var unmira = {
     },
     halt: function () {
       window.clearInterval(unmira.state.interval);
-      unmira.state.interval = undefined;
+      delete unmira.state.interval;
+    },
+    skip: function () {
+      unmira.state.queue = unmira.state.slice(unmira.state.stack.pop());
+      unmira.state.running = true;
+    },
+    screen: function () {
+      unmira.state.stack.push(unmira.graphics.screen.value);
+      unmira.state.running = true;
+    },
+    screen_editable: function () {
+      unmira.graphics.screen.readOnly = !unmira.state.stack.pop();
+      unmira.state.running = true;
     }
   }
 };
@@ -91,6 +117,8 @@ unmira.logo = `  A A A A A A A
 (  \`----------' )
  \\ A A A A A A /
   V V V V V V V`;
+
+unmira.cmds.logo = unmira.cmds._push(unmira.logo);
 
 unmira.run = function () {
   unmira.state.running = false;

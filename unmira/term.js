@@ -7,17 +7,91 @@ unmira.state.handlers.keyup.push(function (_) {
 unmira.state.data["term"] = {
   keyupHandlerIndex: unmira.state.handlers.keyup.length - 1,
   prompt: "> ",
-  cmds: {},
+  cmds: {
+    "not": function(){
+      unmira.state.stack.push(unmira.state.stack.pop()?0:1);
+      unmira.state.running = true;
+    },
+    "+": function () {
+      var fst = unmira.state.stack.pop();
+      unmira.state.stack.push(unmira.state.stack.pop() + fst);
+      unmira.state.running = true;
+    },
+    "*": function () {
+      var fst = unmira.state.stack.pop();
+      unmira.state.stack.push(unmira.state.stack.pop() * fst);
+      unmira.state.running = true;
+    },
+    nl: unmira.cmds._push("\n"),
+    "[": function () {
+      var compiled = [];
+      var cmd = unmira.state.queue.shift();
+      while (cmd !== "]") {
+        compiled.push(cmd);
+        cmd = unmira.state.queue.shift();
+      }
+      unmira.state.stack.push(compiled);
+      unmira.state.running = true;
+    },
+    "]": "]",
+    _get: function (varname) {
+      return function () {
+        unmira.state.stack.push(unmira.state.data["term"].words[varname]);
+        unmira.state.running = true;
+      };
+    },
+    _set: function (varname) {
+      return function () {
+        unmira.state.data["term"].words[varname] = unmira.state.stack.pop();
+        unmira.state.running = true;
+      };
+    },
+    _run: function (cmdname) {
+      return function () {
+        unmira.state.queue = unmira.state.data["term"].words[cmdname].concat(
+          unmira.state.queue
+        );
+        unmira.state.running = true;
+      };
+    },
+    help: unmira.cmds._print(`UnMiRa term: a forth-like interactive shell
+basic commands:
+readline (-- x): doesn't echo input
+dup (x -- x x), drop (x --): manipulate stack
+puts, print (x --): output with or without a trailing newline
++ (x x -- x): add or concatenate
+screen (-- x), draw (x --): view, set contents of screen
+!<var>, @<var>: set, get value of variable
+[ <code> ] !<word>: define word
+<word>: call word
+" <multi word string> ": literal string
+'<singlewordquoting>: another literal string
+"<csd> <string> <dsc>": custom string delimiters
+\\: comment (no parenthesis comments yet)
+`),
+    dowhile: function () {
+      var body = unmira.state.stack.pop();
+      body.push(function () {
+        if (unmira.state.stack.pop()) {
+          unmira.state.queue = body.concat(unmira.state.queue);
+        }
+        unmira.state.running = true;
+      });
+      unmira.state.queue = body.concat(unmira.state.queue);
+      unmira.state.running = true;
+    }
+  },
+  words: {},
   update: function () {
     unmira.graphics.setTerm(
       unmira.state.termBuf + (unmira.state.input.buf[0] || "")
     );
   },
   cleanup: function () {
-    unmira.state.handlers.keyup[
+    delete unmira.state.handlers.keyup[
       unmira.state.data["term"].keyupHandlerIndex
-    ] = null;
-    unmira.state.data["term"] = null;
+    ];
+    delete unmira.state.data["term"];
   },
   readeval_cmd: function () {
     var data = unmira.state.data["term"];
@@ -26,9 +100,9 @@ unmira.state.data["term"] = {
       return;
     }
     unmira.state.queue.push(
-      unmira.cmds.dopush(data.prompt),
+      unmira.cmds._push(data.prompt),
       unmira.cmds.print,
-      unmira.cmds.do(data.update),
+      unmira.cmds._do(data.update),
       unmira.cmds.readline,
       unmira.cmds.dup,
       unmira.cmds.puts,
@@ -46,23 +120,55 @@ unmira.state.data["term"] = {
       return;
     }
     commands = commands.split(" ");
-    console.log(commands);
-    commands.forEach(function (cmd) {
-      if (cmd[0] === "'") {
-        unmira.state.queue.push(unmira.cmds.dopush(cmd.substring(1)));
+    var cmd;
+    while (commands.length) {
+      cmd = commands.shift();
+      if (cmd[0] === '"') {
+        cmd = cmd.split("").reverse().join("");
+        var stringbit = "";
+        var nextbit = commands.shift();
+        while (nextbit !== cmd) {
+          if (!commands.length) {
+            unmira.state.queue.unshift(
+              unmira.cmds._push("ERROR: unfinished string "),
+              unmira.cmds.puts
+            );
+            break;
+          }
+          stringbit += " " + nextbit;
+          nextbit = commands.shift();
+        }
+        unmira.state.queue.push(unmira.cmds._push(stringbit.substring(1)));
+      } else if (cmd[0] === "'") {
+        unmira.state.queue.push(unmira.cmds._push(cmd.substring(1)));
+      } else if (cmd[0] === "\\") {
+        break;
+      } else if (cmd[0] === "!") {
+        unmira.state.queue.push(
+          unmira.state.data["term"].cmds._set(cmd.substring(1))
+        );
+      } else if (cmd[0] === "@") {
+        unmira.state.queue.push(
+          unmira.state.data["term"].cmds._get(cmd.substring(1))
+        );
+      } else if (parseInt(cmd, 10)) {
+        unmira.state.queue.push(unmira.cmds._push(parseInt(cmd, 10)));
+      } else if (unmira.state.data["term"].words[cmd] !== undefined) {
+        unmira.state.queue.push(unmira.state.data["term"].cmds._run(cmd));
       } else {
         unmira.state.queue.push(
-          unmira.state.data["term"].cmds[cmd] || unmira.cmds[cmd]
+          unmira.state.data["term"].cmds[cmd] ||
+            unmira.cmds[cmd] ||
+            unmira.cmds._print("ERROR: unknown command: '" + cmd + "'\n")
         );
       }
-    });
-    console.log(unmira.state);
+    }
     unmira.state.running = true;
   }
 };
 
 unmira.state.queue.push(
-  unmira.cmds.dopush(`Welcome to the unmira console. Try 'help'.`),
+  unmira.cmds._push(`Welcome to the unmira console. Try 'help'.`),
   unmira.cmds.puts,
   unmira.state.data["term"].readeval_cmd
 );
