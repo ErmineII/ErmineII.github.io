@@ -68,7 +68,7 @@ var unmira = {
       delete unmira.state.interval;
     },
     skip: function () {
-      unmira.state.queue = unmira.state.slice(unmira.state.stack.pop());
+      unmira.state.queue = unmira.state.queue.slice(unmira.state.stack.pop());
       unmira.state.running = true;
     },
     screen: function () {
