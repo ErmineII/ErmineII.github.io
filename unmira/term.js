@@ -8,8 +8,8 @@ unmira.state.data["term"] = {
   keyupHandlerIndex: unmira.state.handlers.keyup.length - 1,
   prompt: "> ",
   cmds: {
-    "not": function(){
-      unmira.state.stack.push(unmira.state.stack.pop()?0:1);
+    not: function () {
+      unmira.state.stack.push(unmira.state.stack.pop() ? 0 : 1);
       unmira.state.running = true;
     },
     "+": function () {
@@ -20,6 +20,15 @@ unmira.state.data["term"] = {
     "*": function () {
       var fst = unmira.state.stack.pop();
       unmira.state.stack.push(unmira.state.stack.pop() * fst);
+      unmira.state.running = true;
+    },
+    "/": function () {
+      var fst = unmira.state.stack.pop();
+      unmira.state.stack.push(unmira.state.stack.pop() / fst);
+      unmira.state.running = true;
+    },
+    int: function () {
+      unmira.state.stack.push(parseInt(unmira.state.stack.pop(), 10));
       unmira.state.running = true;
     },
     nl: unmira.cmds._push("\n"),
@@ -84,7 +93,7 @@ screen (-- x), draw (x --): view, set contents of screen
   words: {},
   update: function () {
     unmira.graphics.setTerm(
-      unmira.state.termBuf + (unmira.state.input.buf[0] || "")
+      unmira.state.termBuf + (unmira.state.input.buf[0] || "") + "|"
     );
   },
   cleanup: function () {
