@@ -71,6 +71,28 @@ var unmira = {
       unmira.state.queue = unmira.state.queue.slice(unmira.state.stack.pop());
       unmira.state.running = true;
     },
+    _loop: function (body, label) {
+      var loop = function () {
+        unmira.state.queue = body.concat(unmira.state.queue);
+        unmira.state.running = true;
+      };
+      loop.label = label || "break";
+      body.push(loop);
+      return loop;
+    },
+    _goto: function (label) {
+      return function () {
+        while (unmira.state.queue.shift().label !== label) {}
+        unmira.state.running = true;
+      };
+    },
+    _label: function (label) {
+      var f = function () {
+        unmira.state.running = true;
+      };
+      f.label = label;
+      return f;
+    },
     screen: function () {
       unmira.state.stack.push(unmira.graphics.screen.value);
       unmira.state.running = true;
@@ -117,6 +139,17 @@ unmira.logo = `  A A A A A A A
 (  \`----------' )
  \\ A A A A A A /
   V V V V V V V`;
+
+unmira.mini = ` AAAAAAAAA 
+( _______ )
+( I      I)
+( Iu n m I)
+( I      I)
+( Ii r a I)
+( I      I)
+( l______I)
+(         )
+ VVVVVVVVV  `;
 
 unmira.cmds.logo = unmira.cmds._push(unmira.logo);
 

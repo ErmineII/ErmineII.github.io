@@ -6,7 +6,6 @@ unmira.state.handlers.keyup.push(function (_) {
 
 unmira.state.data["term"] = {
   keyupHandlerIndex: unmira.state.handlers.keyup.length - 1,
-  prompt: "> ",
   cmds: {
     not: function () {
       unmira.state.stack.push(unmira.state.stack.pop() ? 0 : 1);
@@ -90,10 +89,10 @@ screen (-- x), draw (x --): view, set contents of screen
       unmira.state.running = true;
     }
   },
-  words: {},
+  words: { prompt: "> " },
   update: function () {
     unmira.graphics.setTerm(
-      unmira.state.termBuf + (unmira.state.input.buf[0] || "") + "|"
+      unmira.state.termBuf + (unmira.state.input.buf[0] || "") + "_"
     );
   },
   cleanup: function () {
@@ -109,7 +108,7 @@ screen (-- x), draw (x --): view, set contents of screen
       return;
     }
     unmira.state.queue.push(
-      unmira.cmds._push(data.prompt),
+      unmira.cmds._push(data.words.prompt),
       unmira.cmds.print,
       unmira.cmds._do(data.update),
       unmira.cmds.readline,
@@ -132,15 +131,16 @@ screen (-- x), draw (x --): view, set contents of screen
     var cmd;
     while (commands.length) {
       cmd = commands.shift();
-      if (cmd[0] === '"') {
+      if (cmd === "") {
+        continue;
+      } else if (cmd[0] === '"') {
         cmd = cmd.split("").reverse().join("");
         var stringbit = "";
         var nextbit = commands.shift();
         while (nextbit !== cmd) {
           if (!commands.length) {
             unmira.state.queue.unshift(
-              unmira.cmds._push("ERROR: unfinished string "),
-              unmira.cmds.puts
+              unmira.cmds._print("ERROR: unfinished string \n")
             );
             break;
           }
@@ -160,10 +160,14 @@ screen (-- x), draw (x --): view, set contents of screen
         unmira.state.queue.push(
           unmira.state.data["term"].cmds._get(cmd.substring(1))
         );
-      } else if (parseInt(cmd, 10)) {
+      } else if (!isNaN(parseInt(cmd, 10))) {
         unmira.state.queue.push(unmira.cmds._push(parseInt(cmd, 10)));
       } else if (unmira.state.data["term"].words[cmd] !== undefined) {
-        unmira.state.queue.push(unmira.state.data["term"].cmds._run(cmd));
+        if (unmira.state.data["term"].words[cmd].reverse === undefined)
+          unmira.state.queue.unshift(
+            unmira.cmds._print("ERROR: can't call @" + cmd + "\n")
+          );
+        else unmira.state.queue.push(unmira.state.data["term"].cmds._run(cmd));
       } else {
         unmira.state.queue.push(
           unmira.state.data["term"].cmds[cmd] ||
@@ -177,8 +181,7 @@ screen (-- x), draw (x --): view, set contents of screen
 };
 
 unmira.state.queue.push(
-  unmira.cmds._push(`Welcome to the unmira console. Try 'help'.`),
-  unmira.cmds.puts,
+  unmira.cmds._print(`Welcome to the unmira console. Try 'help'.\n`),
   unmira.state.data["term"].readeval_cmd
 );
 unmira.run();
