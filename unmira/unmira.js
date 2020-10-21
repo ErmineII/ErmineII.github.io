@@ -152,6 +152,7 @@ unmira.mini = ` AAAAAAAAA
  VVVVVVVVV  `;
 
 unmira.cmds.logo = unmira.cmds._push(unmira.logo);
+unmira.cmds.minilogo = unmira.cmds._push(unmira.mini);
 
 unmira.run = function () {
   unmira.state.running = false;

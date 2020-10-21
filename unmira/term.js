@@ -6,6 +6,13 @@ unmira.state.handlers.keyup.push(function (_) {
 
 unmira.state.data["term"] = {
   keyupHandlerIndex: unmira.state.handlers.keyup.length - 1,
+  run: function () {
+    unmira.state.queue.push(
+      unmira.cmds._print(`Welcome to the unmira console. Try 'help'.\n`),
+      unmira.state.data["term"].readeval_cmd
+    );
+    unmira.run();
+  },
   cmds: {
     not: function () {
       unmira.state.stack.push(unmira.state.stack.pop() ? 0 : 1);
@@ -63,20 +70,40 @@ unmira.state.data["term"] = {
       };
     },
     help: unmira.cmds._print(`UnMiRa term: a forth-like interactive shell
-basic commands:
-readline (-- x): doesn't echo input
-dup (x -- x x), drop (x --): manipulate stack
-puts, print (x --): output with or without a trailing newline
-+ (x x -- x): add or concatenate
-screen (-- x), draw (x --): view, set contents of screen
+basic syntax:
 !<var>, @<var>: set, get value of variable
 [ <code> ] !<word>: define word
-<word>: call word
+<word>, _<program>: call word, program
 " <multi word string> ": literal string
 '<singlewordquoting>: another literal string
-"<csd> <string> <dsc>": custom string delimiters
 \\: comment (no parenthesis comments yet)
+
+use 'list' command to list commands
 `),
+    list: function () {
+      try {
+        unmira.state.queue.unshift(
+          unmira.cmds._print("_" + Object.keys(unmira.state.data).join(" _")),
+          unmira.cmds._print(
+            "\n@" + Object.keys(unmira.state.data["term"].words).join(" @")
+          ),
+          unmira.cmds._print(
+            "\n" +
+              Object.keys(unmira.state.data["term"].cmds)
+                .concat(Object.keys(unmira.cmds))
+                .filter(function (z) {
+                  return z[0] !== "_";
+                })
+                .join(" ") +
+              "\n"
+          )
+        );
+      } catch (s) {
+        console.log(s);
+      } finally {
+        unmira.state.running = true;
+      }
+    },
     dowhile: function () {
       var body = unmira.state.stack.pop();
       body.push(function () {
@@ -160,6 +187,19 @@ screen (-- x), draw (x --): view, set contents of screen
         unmira.state.queue.push(
           unmira.state.data["term"].cmds._get(cmd.substring(1))
         );
+      } else if (cmd[0] === "_") {
+        var prog = unmira.state.data[cmd.substring(1)];
+        if (prog === undefined) {
+          unmira.state.queue.unshift(
+            unmira.cmds._print("ERROR: not installed \n")
+          );
+        } else if (prog.run === undefined) {
+          unmira.state.queue.unshift(
+            unmira.cmds._print("ERROR: not executable \n")
+          );
+        } else {
+          prog.run();
+        }
       } else if (!isNaN(parseInt(cmd, 10))) {
         unmira.state.queue.push(unmira.cmds._push(parseInt(cmd, 10)));
       } else if (unmira.state.data["term"].words[cmd] !== undefined) {
@@ -179,9 +219,3 @@ screen (-- x), draw (x --): view, set contents of screen
     unmira.state.running = true;
   }
 };
-
-unmira.state.queue.push(
-  unmira.cmds._print(`Welcome to the unmira console. Try 'help'.\n`),
-  unmira.state.data["term"].readeval_cmd
-);
-unmira.run();
