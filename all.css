@@ -96,14 +96,14 @@ blockquote {
 
 @font-face {
   font-family: "BefontLegible";
-  font-style: normal;
   src: url("media/BefontLegible-Regular.otf") format("opentype");
+  font-style: normal;
 }
 
 @font-face {
   font-family: "BefontLegible";
-  font-style: italic;
   src: url("media/BefontLegible-Italic.otf") format("opentype");
+  font-style: italic;
 }
 
 @font-face {
