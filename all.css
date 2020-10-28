@@ -90,14 +90,20 @@ blockquote {
 
 @font-face {
   font-family: "BefontSquare";
-  font-size: 20pt;
+  font-style: normal;
   src: url("media/BefontSquare-Regular.otf") format("opentype");
 }
 
 @font-face {
   font-family: "BefontLegible";
-  font-size: 20pt;
+  font-style: normal;
   src: url("media/BefontLegible-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "BefontLegible";
+  font-style: italic;
+  src: url("media/BefontLegible-Italic.otf") format("opentype");
 }
 
 @font-face {

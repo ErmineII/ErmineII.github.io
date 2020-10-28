@@ -17,7 +17,9 @@
       <select id="style" oninput="(()=>{
         document.body.style.fontFamily = this.value;
         document.querySelector('#dl').href = 'media/'+this.value+'-Regular.otf';
-        document.querySelector('#try').style.fontFamily = this.value;
+        document.querySelector('#idl').hidden = this.value !== ('BefontLegible');
+        document.querySelector('#try').style.fontFamily =
+          document.querySelector('#tryrt').style.fontFamily = this.value;
       })()">
         <option style="font-family: 'BefontLegible'" value="BefontLegible">
           Legible
@@ -27,10 +29,13 @@
         </option>
       </select>
       <a href="media/BefontLegible-Regular.otf" id="dl" download>download</a>
+      <a href="media/BefontLegible-Italic.otf" id="idl" download><em>italic</em></a>
   </div>
   <div class="fg">
     <ul >
-      <li>Square</li>
+      <li>Square or Legible</li>
+      <li>Legible is legible</li>
+      <li><em>Real italics (Legible)</em></li>
       <li>Mono-spaced</li>
     </ul><br>
     <textarea id="try" rows="10" cols="40" name="text" placeholder="try it"
@@ -49,5 +54,8 @@ NOPQRSTUVWXYZ
 [\|/?.:;<>"']
 {!@#$%^&*(-)}
 +=_</textarea>
+<pre style="font-family: 'BefontLegible'; font-size: 30pt; border: 5px #0007;
+            font-weight: 500; margin: 0.25in; white-space: nowrap; text-align: left;"
+            id="tryrt" contentEditable>[Try Rich-text]</pre>
   </div>
 </body></html>
