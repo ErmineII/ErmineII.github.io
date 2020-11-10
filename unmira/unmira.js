@@ -5,13 +5,14 @@ var unmira = {
      * (like vm instructions)
      */
     readline: function () {
+      var input = unmira.state.input;
       unmira.state.running = false;
-      if (unmira.state.input.buf.length > 1) {
+      if (input.buf.length > 1) {
         // if input buffered
-        unmira.state.stack.push(unmira.state.input.buf.shift()); // push one line of input
+        unmira.state.stack.push(input.buf[input.line].join()); // push one line of input
         unmira.state.running = true; // continue
       } else {
-        unmira.state.input.waiting = true; // wait for input
+        input.waiting = true; // wait for input
       }
     },
     getchar: function () {
@@ -117,30 +118,20 @@ unmira.freshstate = function () {
       keyup: []
     },
     input: {
-      buf: [""],
+      buf: [[]],
       waiting: false,
-      getchar: false
+      getchar: false,
+      line: 0,
+      char: 0
     }
   };
 };
 
-unmira.logo = `  A A A A A A A
- / V V V V V V \\
-(  S----------, )  -----A-A------
- ) |          |(   || n IV Ii [)a
-(  |          | )  \`'-------- I\\-
- ) |          |(
-(  |          | )
- ) |          |(
-(  |          | )
- ) |          |(
-(  |          | )
- ) |          |(
-(  \`----------' )
- \\ A A A A A A /
-  V V V V V V V`;
+unmira.header = `-----A-A------
+|| n IV Ii [)a
+\`'-------- I\\-`;
 
-unmira.mini = ` AAAAAAAAA 
+unmira.logo = ` AAAAAAAAA 
 ( _______ )
 ( I      I)
 ( Iu n m I)
@@ -149,10 +140,7 @@ unmira.mini = ` AAAAAAAAA
 ( I      I)
 ( l______I)
 (         )
- VVVVVVVVV  `;
-
-unmira.cmds.logo = unmira.cmds._push(unmira.logo);
-unmira.cmds.minilogo = unmira.cmds._push(unmira.mini);
+ VVVVVVVVV`;
 
 unmira.run = function () {
   unmira.state.running = false;

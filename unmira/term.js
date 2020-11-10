@@ -33,17 +33,31 @@ unmira.state.data["term"] = {
       unmira.state.stack.push(unmira.state.stack.pop() / fst);
       unmira.state.running = true;
     },
+    "-": function () {
+      var fst = unmira.state.stack.pop();
+      unmira.state.stack.push(unmira.state.stack.pop() - fst);
+      unmira.state.running = true;
+    },
     int: function () {
       unmira.state.stack.push(parseInt(unmira.state.stack.pop(), 10));
       unmira.state.running = true;
     },
     nl: unmira.cmds._push("\n"),
+    stack: function () {
+      unmira.state.stack.push(unmira.state.stack.join(", "));
+      unmira.state.running = true;
+    },
     "[": function () {
       var compiled = [];
+      var nesting = 1;
       var cmd = unmira.state.queue.shift();
-      while (cmd !== "]") {
-        compiled.push(cmd);
-        cmd = unmira.state.queue.shift();
+      while (nesting) {
+        if (cmd === "]") nesting--;
+        else {
+          if (cmd === unmira.state.data["term"]["["]) nesting++;
+          compiled.push(cmd);
+          cmd = unmira.state.queue.shift();
+        }
       }
       unmira.state.stack.push(compiled);
       unmira.state.running = true;
@@ -116,11 +130,31 @@ use 'list' command to list commands
       unmira.state.running = true;
     }
   },
-  words: { prompt: "> " },
+  words: {
+    prompt: "> ",
+    source: ` S-,   S-,
+ |S' O \`,|
+ ||  |  ||
+S'|O D=Q|\`,
+\`,|| W  |S'
+ ||D-D-O||
+ |\`, W S'|
+ \`-' " \`-'`,
+    cursor: "|"
+  },
   update: function () {
-    unmira.graphics.setTerm(
-      unmira.state.termBuf + (unmira.state.input.buf[0] || "") + "_"
-    );
+    if (unmira.state.input.buf[unmira.state.input.line]) {
+      var tmp = unmira.state.input.buf[unmira.state.input.line].slice();
+      tmp.splice(
+        unmira.state.input.char,
+        0,
+        unmira.state.data["term"].words.cursor
+      );
+      unmira.graphics.setTerm(unmira.state.termBuf + tmp.join(""));
+    } else
+      unmira.graphics.setTerm(
+        unmira.state.termBuf + unmira.state.data["term"].words.cursor
+      );
   },
   cleanup: function () {
     delete unmira.state.handlers.keyup[
