@@ -20,7 +20,7 @@ unmira.fixCursor = function () {
     if (state.buf[0].length > 0) state.buf.unshift([]);
   }
   if (state.line >= state.buf.length) state.line = state.buf.length - 1;
-  if (state.char < 0) state.char = state.line;
+  if (state.char < 0) state.char = state.line.length;
   if (state.char > state.buf[state.line].length) state.char = 0;
   state.buf[state.line] ||= [];
 };
