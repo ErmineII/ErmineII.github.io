@@ -7,13 +7,7 @@ var unmira = {
     readline: function () {
       var input = unmira.state.input;
       unmira.state.running = false;
-      if (input.buf.length > 1) {
-        // if input buffered
-        unmira.state.stack.push(input.buf[input.line].join()); // push one line of input
-        unmira.state.running = true; // continue
-      } else {
-        input.waiting = true; // wait for input
-      }
+      input.waiting = true; // wait for input
     },
     getchar: function () {
       unmira.state.running = false;

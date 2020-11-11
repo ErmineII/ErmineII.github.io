@@ -20,7 +20,7 @@ unmira.fixCursor = function () {
     if (state.buf[0].length > 0) state.buf.unshift([]);
   }
   if (state.line >= state.buf.length) state.line = state.buf.length - 1;
-  if (state.char < 0) state.char = state.line.length;
+  if (state.char < 0) state.char = state.buf[state.line].length;
   if (state.char > state.buf[state.line].length) state.char = 0;
   state.buf[state.line] ||= [];
 };
@@ -37,12 +37,13 @@ unmira.graphics.term.onkeydown = function (k) {
     case "Enter":
       if (state.waiting) {
         unmira.state.stack.push(state.buf[state.line].join(""));
-        state.line--;
+        if (state.buf[0].length) state.buf.unshift([]);
+        state.line = 0;
         state.waiting = false;
         return unmira.run();
       } else {
-        state.buf.unshift([]);
-        state.line--;
+        if (state.buf[0].length) state.buf.unshift([]);
+        state.line = 0;
       }
       if (state.line) {
         state.line = 0;
