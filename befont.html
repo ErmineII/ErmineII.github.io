@@ -1,22 +1,22 @@
 <html><head>
   <title>BF</title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="khak.css" type="text/css" id="theme"></link>
-  <link rel="icon" href='media/BFAt.svg'></link>
+  <link rel="stylesheet" href="/css/khak.css" type="text/css" id="theme"></link>
+  <link rel="icon" href='/media/BFAt.svg'></link>
 </head>
 <body style="font-family: 'BefontLegible'; font-size: 30pt;">
   <h2>The Befunge Font&nbsp;
-    <image src="media/moon.svg" id="themech"
+    <image src="/media/moon.svg" id="themech"
       width="30" height="30" title="change theme">
     </image>
-    <script type="text/javascript" src="theme.js">
+    <script type="text/javascript" src="/theme.js">
     </script>
   </h2>
   <div style="font-size: 20pt;">
       <label for="style">style: </label>
       <select id="style" oninput="(()=>{
         document.body.style.fontFamily = this.value;
-        document.querySelector('#dl').href = 'media/'+this.value+'-Regular.otf';
+        document.querySelector('#dl').href = '/media/'+this.value+'-Regular.otf';
         document.querySelector('#idl').hidden = this.value !== ('BefontLegible');
         document.querySelector('#try').style.fontFamily =
           document.querySelector('#tryrt').style.fontFamily = this.value;
@@ -28,8 +28,8 @@
           Square
         </option>
       </select>
-      <a href="media/BefontLegible-Regular.otf" id="dl" download>download</a>
-      <a href="media/BefontLegible-Italic.otf" id="idl" download><em>italic</em></a>
+      <a href="/media/BefontLegible-Regular.otf" id="dl" download>download</a>
+      <a href="/media/BefontLegible-Italic.otf" id="idl" download><em>italic</em></a>
   </div>
   <div class="fg">
     <ul >

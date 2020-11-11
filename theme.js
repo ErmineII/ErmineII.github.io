@@ -4,10 +4,10 @@ var icon = document.getElementById("themech");
 icon.width = 30;
 icon.height = 30;
 var themes = [
-  ["media/sun.svg", "khak.css"],
-  ["media/moon.svg", "dp.css"],
-  ["media/tree.svg", "olive.css"],
-  ["media/snowflake.svg", "all.css"]
+  ["/media/sun.svg", "/css/khak.css"],
+  ["/media/moon.svg", "/css/dp.css"],
+  ["/media/tree.svg", "/css/olive.css"],
+  ["/media/snowflake.svg", "/css/all.css"]
 ];
 
 var dtheme = localStorage.getItem("theme");
