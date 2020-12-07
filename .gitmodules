@@ -1,0 +1,3 @@
+[submodule "lua/5.3/mapl"]
+	path = lua/5.3/mapl
+	url = https://github.com/Ermineii/mapl

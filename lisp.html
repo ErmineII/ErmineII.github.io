@@ -67,7 +67,7 @@ function tree(obj, maxdepth, before) -- call like tree(var) or tree(var, 4)
 end
       print("lisp repl")
       js = require("js")
-      lisp = require("lisp")
+      lisp = require("mapl.lisp")
       lisp.begin()
       lispEval = function (str)
         return lisp.eval(lisp.read(str))
