@@ -1,0 +1,60 @@
+<html><head>
+  <title>PT</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/khak.css" type="text/css" id="theme"></link>
+  <link rel="icon" href='/media/NPHotChoc.svg.png'></link>
+</head>
+<body style="font-family: 'poulTre';">
+  <h2>The PoulTre Font&nbsp;
+    <image src="/media/moon.svg" id="themech"
+      width="30" height="30" title="change theme">
+    </image>
+    <script type="text/javascript" src="/js/theme.js">
+    </script>
+  </h2>
+  <div style="font-size: 20pt;">
+      <label for="style">style: </label>
+      <select id="style" oninput="(()=>{
+        document.body.style.fontFamily = this.value;
+        document.querySelector('#dl').href = '/media/'+this.value+'-Regular.otf';
+        document.querySelector('#try').style.fontFamily =
+          document.querySelector('#tryrt').style.fontFamily = this.value;
+      })()">
+        <option style="font-family: 'poulTre'" value="poulTre">
+          PoulTre (Tri-spaced)
+        </option>
+        <option style="font-family: 'poultreMono'"  value="poultreMono" >
+          poultreMono (Mono-spaced)
+        </option>
+      </select>
+      <a href="/media/poulTre-Regular.otf" id="dl" download>download (OTF)</a>
+  </div>
+  <div class="fg">
+    <ul >
+      <li>Mono-spaced or tri-spaced. Both are suitable for programming, though it may break alignment</li>
+      <li>Proportional version still has noticeable punctuation and symbols</li>
+      <li>No spacing problems (though plenty of shaping problems)</li>
+    </ul><br>
+    <textarea id="try" rows="10" cols="40" name="text" placeholder="try it"
+      style="font-family: 'poulTre'; font-size: 20pt;
+             margin: 0.25in; white-space: nowrap;">
+(()=>{
+  document.body.style.fontFamily = this.value;
+  document.querySelector('#dl').href = '/media/'+this.value+'-Regular.otf';
+  document.querySelector('#try').style.fontFamily =
+    document.querySelector('#tryrt').style.fontFamily = this.value;
+})()
+
+abcdefghijklm
+nopqrstuvwxyz
+ABCDEFGHIJKLM
+NOPQRSTUVWXYZ
+0123456789 ~`
+[\|/?.:;<>"']
+{!@#$%^&*(-)}
++=_</textarea>
+<pre style="font-family: 'poulTre'; font-size: 20pt; border: 5px #0007;
+            margin: 0.25in; white-space: nowrap; text-align: left;"
+            id="tryrt" contentEditable>[Try Rich-text]</pre>
+  </div>
+</body></html>
