@@ -114,8 +114,12 @@ blockquote {
 
 @font-face {
   font-family: "poultreMono";
-  font-size: 20pt;
   src: url("/media/poultreMono-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "poulTre";
+  src: url("/media/poulTre-Regular.otf") format("opentype");
 }
 
 ul {
