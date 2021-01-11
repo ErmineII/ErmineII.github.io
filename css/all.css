@@ -112,6 +112,12 @@ blockquote {
   src: url("/media/bigpix-Regular.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "poultreMono";
+  font-size: 20pt;
+  src: url("/media/poultreMono-Regular.otf") format("opentype");
+}
+
 ul {
   text-align: left;
 }
