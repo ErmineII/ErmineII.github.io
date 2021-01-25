@@ -1,3 +1,5 @@
+@import "fonts.css";
+
 body {
   display: block;
   margin-top: 2%;
@@ -76,50 +78,6 @@ blockquote {
   margin-top: 5px;
   margin-bottom: 8px;
   max-width: 600px;
-}
-/*
-@font-face {
-  font-family: "SpiderWire";
-  src: url("media/SpiderWire-Regular.otf") format("opentype");
-}
-*/
-@font-face {
-  font-family: "SpiderWireMono";
-  src: url("/media/SpiderWireMono-Regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "BefontSquare";
-  font-style: normal;
-  src: url("/media/BefontSquare-Regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "BefontLegible";
-  src: url("/media/BefontLegible-Regular.otf") format("opentype");
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "BefontLegible";
-  src: url("/media/BefontLegible-Italic.otf") format("opentype");
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "bigpix";
-  font-size: 20pt;
-  src: url("/media/bigpix-Regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "poultreMono";
-  src: url("/media/poultreMono-Regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "poulTre";
-  src: url("/media/poulTre-Regular.otf") format("opentype");
 }
 
 ul {
