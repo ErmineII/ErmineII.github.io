@@ -6,34 +6,11 @@
 <body style="font-family: monospace;">
   <h2>
     <sup><a href="/">index <-</a></sup>
-    That page isn't here, but it might be on...
-    <image src="/media/moon.svg" id="themech"
-        width="30" height="30" title="change theme">
-    </image>
-    <script type="text/javascript" src="/js/theme.js">
-    </script>
-    <br>
-  </h2>
-  <ul class="fg">
-    <li><a>Wikipedia<br><iframe width="400" height="300" id="wp"></iframe></a></li>
-    <li><a>the Wiki<br><iframe width="300" height="400" id="wiki"></iframe></a></li>
-  </ul>
+    That page isn't here
   <script>
-  var page = window.location.pathname.replace(/[^a-zA-Z]/g, '');
-  var srcurls = {
-    wp: "https://en.m.wikipedia.org/w/index.php?search=",
-    wiki: "https://proxy.c2.com/cgi/fullSearch?search=",
+  if(/^\/blog\/2020\//.test(window.location.pathname){
+    window.location = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
   };
-  var linkurls = {
-    wp: "https://en.wikipedia.org/w/index.php?search=",
-    wiki: "https://proxy.c2.com/cgi/fullSearch?search=",
-  };
-  console.log(page);
-  var ifrs = document.querySelectorAll("iframe");
-  for(var i = 0; i<ifrs.length; i++){
-    ifrs[i].src = srcurls[ifrs[i].id]+page;
-    ifrs[i].parentElement.href = linkurls[ifrs[i].id]+page;
-  }
   </script>
 </body>
 </html>
